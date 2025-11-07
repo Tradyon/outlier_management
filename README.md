@@ -1,5 +1,3 @@
-Option B: Get the Mecha BREAK variant with linear switches (quieter than clicky) if available in India / region.
-
 # Outlier Detection System
 
 Automated price outlier detection for shipment data using EWM-MAD (Exponentially Weighted Moving - Median Absolute Deviation).
