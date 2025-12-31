@@ -1,0 +1,31 @@
+services:
+  weaviate:
+    image: semitechnologies/weaviate:1.23.7
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+      DEFAULT_VECTORIZER_MODULE: "text2vec-transformers"
+      ENABLE_MODULES: "text2vec-transformers,reranker-transformers"
+      TRANSFORMERS_INFERENCE_API: "http://t2v-transformers:8080"
+      RERANKER_INFERENCE_API: "http://reranker-transformers:8080"
+      CLUSTER_HOSTNAME: "node1"
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    depends_on:
+      - t2v-transformers
+      - reranker-transformers
+
+  t2v-transformers:
+    image: semitechnologies/transformers-inference:sentence-transformers-all-MiniLM-L6-v2
+    restart: unless-stopped
+
+  reranker-transformers:
+    image: semitechnologies/reranker-transformers:cross-encoder-ms-marco-MiniLM-L-6-v2
+    restart: unless-stopped
+
+volumes:
+  weaviate_data:
