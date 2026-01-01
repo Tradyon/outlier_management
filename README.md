@@ -12,7 +12,13 @@ Automated price outlier detection for shipment data using EWM-MAD (Exponentially
 ## Installation
 
 ```bash
+# Using uv
+uv venv
+uv pip install -r requirements.txt
+
+# Using pip
 pip install -r requirements.txt
+
 gcloud auth application-default login
 ```
 
